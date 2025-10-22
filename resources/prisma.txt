@@ -1,0 +1,5 @@
+// RESET DATABASE
+npx prisma migrate reset
+
+// Prisma INIT
+npx prisma migrate dev --name init
