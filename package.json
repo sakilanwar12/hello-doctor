@@ -1,8 +1,8 @@
 {
-  "name": "ph-health-care-starter",
+  "name": "hello-doctor",
   "version": "1.0.0",
   "main": "server.js",
-  "author": "shafayat",
+  "author": "Md. Sakil Anwar",
   "license": "MIT",
   "prisma": {
     "schema": "./prisma/schema"
@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@prisma/client": "^6.16.3",
+    "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
     "dotenv": "^17.2.2",
     "express": "^5.1.0",
