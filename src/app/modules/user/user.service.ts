@@ -1,5 +1,6 @@
 import bcrypt from "bcryptjs";
 import { prisma, Prisma } from "./../../../lib/prisma";
+import { UserStatus } from "@prisma/client";
 const createPatient = async (
   payload: Prisma.PatientCreateInput & Prisma.UserCreateInput
 ) => {
@@ -32,7 +33,7 @@ const createPatient = async (
         patient,
       },
     });
-   return await tnx.patient.create({
+    return await tnx.patient.create({
       data: {
         name,
         address,
@@ -40,11 +41,39 @@ const createPatient = async (
       },
     });
   });
-  console.log(result);
 
   return result;
 };
 
+const getAllUser = ({
+  page,
+  limit,
+  search,
+  role
+}: {
+  page: number;
+  limit: number;
+  search?: string;
+  role?:any;
+}) => {
+  const skip = (page - 1) * limit;
+  const result = prisma.user.findMany({
+    skip,
+    take: limit,
+    where: {
+      email: {
+        contains: search,
+        mode: "insensitive",
+      },
+      role,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+  return result;
+};
 export const UserService = {
   createPatient,
+  getAllUser,
 };

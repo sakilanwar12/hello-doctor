@@ -13,6 +13,23 @@ const createPatient = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const getAllUser = catchAsync(async (req: Request, res: Response) => {
+  const { page, limit, search, role } = req.query;
+  const result = await UserService.getAllUser({
+    page: Number(page),
+    limit: Number(limit),
+    search: search as string,
+    role,
+  });
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: "Get All User",
+    data: result,
+  });
+});
+
 export const UserController = {
   createPatient,
+  getAllUser,
 };
